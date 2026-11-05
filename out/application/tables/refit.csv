@@ -1,0 +1,4 @@
+"Arm","Refit_window","Occ_first_alarm","Mag_first_alarm","Occ_terminal","Mag_terminal"
+"A. Original (no refit)","none","2018-09-02","2018-06-07",69.27,124.32
+"B. Refit flagged head (magnitude) on sliding window","2017-01-23 to 2018-06-07","2019-02-03","2018-09-04",64.82,23.91
+"C. Refit control head (occurrence) on sliding window","2017-01-23 to 2018-06-07","2021-09-18","2018-08-08",4.58,116.02

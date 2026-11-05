@@ -1,16 +1,16 @@
 \begin{table}
 
-\caption{Semi-synthetic validation. Occurrence injection sets each positive day to zero with probability \$0.4\$ from 2019-06-01; magnitude injection adds a \$\textbackslash{}mathrm\{Poisson\}(0.5\textbackslash{},y\_t)\$ count to each positive day from 2019-06-01. The forecast is frozen at its pre-injection parameters and covariate trajectory. A well-calibrated monitor flags the injected head.}
+\caption{Semi-synthetic validation (main run, magnitude-injection seed offset 200). Occurrence injection sets each positive day to zero with probability \$0.4\$ from 2019-06-01; magnitude injection adds a \$\textbackslash{}mathrm\{Poisson\}(0.5\textbackslash{},y\_t)\$ count to each positive day from 2019-06-01. The forecast is frozen at its pre-injection parameters and covariate trajectory. A well-calibrated monitor flags the injected head and stays quiet on the other.}
 \centering
 \begin{tabular}[t]{llllllrrllrr}
 \toprule
 id & series & baseline\_occ & baseline\_mag & occinj\_occ & occinj\_mag & occinj\_occ\_term & occinj\_mag\_term & maginj\_occ & maginj\_mag & maginj\_occ\_term & maginj\_mag\_term\\
 \midrule
-r2 & metformin / LACTIC ACIDOSIS & 2018-09-02 & 2018-06-07 & 2018-09-02 & 2018-06-07 & 102.19 & 85.84 & 2018-09-02 & 2018-06-07 & 69.27 & 267.75\\
-r3 & lisinopril / COUGH & none & 2021-08-16 & 2020-03-13 & 2022-09-13 & 98.89 & 10.02 & none & 2021-04-13 & 0.20 & 25.70\\
-r4 & atorvastatin / MYALGIA & 2023-04-20 & 2022-05-02 & 2020-03-31 & 2022-07-19 & 142.11 & 6.37 & 2023-04-20 & 2024-02-07 & 12.99 & 6.08\\
-r6 & isotretinoin / DEPRESSION & none & 2019-09-13 & 2019-10-25 & 2020-02-24 & 43.11 & 7.28 & none & none & -1.39 & 2.78\\
-r8 & levothyroxine / ALOPECIA & 2018-05-18 & 2018-08-03 & 2018-05-18 & 2018-08-03 & 16.02 & 0.90 & 2018-05-18 & 2018-08-03 & 45.12 & 77.71\\
+r2 & metformin / LACTIC ACIDOSIS & 2018-09-02 & 2018-06-07 & 2018-09-02 & 2018-06-07 & 102.19 & 85.84 & 2018-09-02 & 2018-06-07 & 69.27 & 263.37\\
+r3 & lisinopril / COUGH & none & 2021-08-16 & 2020-03-13 & 2022-09-13 & 98.89 & 10.02 & none & 2021-04-15 & 0.20 & 29.23\\
+r4 & atorvastatin / MYALGIA & 2023-04-20 & 2022-05-02 & 2020-03-31 & 2022-07-19 & 142.11 & 6.37 & 2023-04-20 & 2024-09-27 & 12.99 & 3.34\\
+r6 & isotretinoin / DEPRESSION & none & 2019-09-13 & 2019-10-25 & 2020-02-24 & 43.11 & 7.28 & none & none & -1.39 & 1.00\\
+r8 & levothyroxine / ALOPECIA & 2018-05-18 & 2018-08-03 & 2018-05-18 & 2018-08-03 & 16.02 & 0.90 & 2018-05-18 & 2018-08-03 & 45.12 & 93.18\\
 \bottomrule
 \end{tabular}
 \end{table}

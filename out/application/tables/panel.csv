@@ -1,6 +1,6 @@
-"id","series","zero_share","oos_winner","occ_tol","mag_tol","whole_tol","occ_strict","mag_strict","occ_terminal","mag_terminal","whole_terminal"
-"r2","metformin / LACTIC ACIDOSIS",0.216,"Hurdle-NB","2018-09-02","2018-06-07","2018-03-06","2018-06-14","2018-05-04",69.27,124.32,200.44
-"r3","lisinopril / COUGH",0.192,"NB","none","2021-08-16","none","2020-12-24","2019-06-13",0.2,10.52,-4.3
-"r4","atorvastatin / MYALGIA",0.217,"NB","2023-04-20","2022-05-02","2022-02-27","2021-05-31","2021-06-03",12.99,14.05,15.57
-"r6","isotretinoin / DEPRESSION",0.557,"Hurdle-NB","none","2019-09-13","none","2019-06-05","2019-04-17",-1.39,15.98,-3.17
-"r8","levothyroxine / ALOPECIA",0.397,"Hurdle-NB","2018-05-18","2018-08-03","2018-05-08","2018-05-04","2018-06-25",45.12,-0.77,25.2
+"id","series","zero_share","oos_winner","occ_tol","mag_tol","whole_tol","occ_strict","mag_strict","occ_terminal","mag_terminal","whole_terminal","pi_mean","rate_mag","rate_whole","rate_ratio","pi_inv_cubed"
+"r2","metformin / LACTIC ACIDOSIS",0.216,"Hurdle-NB","2018-09-02","2018-06-07","2018-03-06","2018-06-14","2018-05-04",69.27,124.32,200.44,0.697,0.04862,0.07839,0.62,2.95
+"r3","lisinopril / COUGH",0.192,"NB","none","2021-08-16","none","2020-12-24","2019-06-13",0.2,10.52,-4.3,0.603,0.00411,-0.00168,-2.45,4.56
+"r4","atorvastatin / MYALGIA",0.217,"NB","2023-04-20","2022-05-02","2022-02-27","2021-05-31","2021-06-03",12.99,14.05,15.57,0.557,0.00549,0.00609,0.9,5.8
+"r6","isotretinoin / DEPRESSION",0.557,"Hurdle-NB","none","2019-09-13","none","2019-06-05","2019-04-17",-1.39,15.98,-3.17,0.284,0.00625,-0.00124,-5.05,43.49
+"r8","levothyroxine / ALOPECIA",0.397,"Hurdle-NB","2018-05-18","2018-08-03","2018-05-08","2018-05-04","2018-06-25",45.12,-0.77,25.2,0.466,-3e-04,0.00985,-0.03,9.88

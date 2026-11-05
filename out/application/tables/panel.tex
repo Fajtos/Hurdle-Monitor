@@ -1,16 +1,16 @@
 \begin{table}
 
-\caption{Panel of first-alarm dates and terminal log e-process for the five retained series under tolerant and strict margins. The OOS winner column reports the model with the lowest out-of-sample log score among OLS, Poisson, NB, and Hurdle-NB.}
+\caption{Panel of first-alarm dates and terminal log e-process for the five retained series under tolerant and strict margins. The OOS winner column reports the model with the lowest out-of-sample log score among OLS, Poisson, NB, and Hurdle-NB. The rate columns give the mean per-day log e-process growth (terminal log E divided by the monitoring-window length) for the magnitude head and the whole-PIT test, and rate\textbackslash{}\_ratio is their ratio. \$\textbackslash{}pi\$\textbackslash{}\_mean is the mean of the fitted occurrence probability over the monitoring window; \$\textbackslash{}pi\textasciicircum{}\{-3\}\$ is the dilution factor Proposition 1 predicts for the growth-rate ratio under a magnitude-only alternative with constant \$\textbackslash{}pi\$. The observed ratio only matches the theoretical prediction when both rates are positive; where the whole-PIT rate is negative, the theoretical comparison does not apply and the whole-PIT has accumulated evidence \textbackslash{}emph\{against\} a drift.}
 \centering
-\begin{tabular}[t]{llrllllllrrr}
+\begin{tabular}[t]{llrllllllrrrrrrrr}
 \toprule
-id & series & zero\_share & oos\_winner & occ\_tol & mag\_tol & whole\_tol & occ\_strict & mag\_strict & occ\_terminal & mag\_terminal & whole\_terminal\\
+id & series & zero\_share & oos\_winner & occ\_tol & mag\_tol & whole\_tol & occ\_strict & mag\_strict & occ\_terminal & mag\_terminal & whole\_terminal & pi\_mean & rate\_mag & rate\_whole & rate\_ratio & pi\_inv\_cubed\\
 \midrule
-r2 & metformin / LACTIC ACIDOSIS & 0.216 & Hurdle-NB & 2018-09-02 & 2018-06-07 & 2018-03-06 & 2018-06-14 & 2018-05-04 & 69.27 & 124.32 & 200.44\\
-r3 & lisinopril / COUGH & 0.192 & NB & none & 2021-08-16 & none & 2020-12-24 & 2019-06-13 & 0.20 & 10.52 & -4.30\\
-r4 & atorvastatin / MYALGIA & 0.217 & NB & 2023-04-20 & 2022-05-02 & 2022-02-27 & 2021-05-31 & 2021-06-03 & 12.99 & 14.05 & 15.57\\
-r6 & isotretinoin / DEPRESSION & 0.557 & Hurdle-NB & none & 2019-09-13 & none & 2019-06-05 & 2019-04-17 & -1.39 & 15.98 & -3.17\\
-r8 & levothyroxine / ALOPECIA & 0.397 & Hurdle-NB & 2018-05-18 & 2018-08-03 & 2018-05-08 & 2018-05-04 & 2018-06-25 & 45.12 & -0.77 & 25.20\\
+r2 & metformin / LACTIC ACIDOSIS & 0.216 & Hurdle-NB & 2018-09-02 & 2018-06-07 & 2018-03-06 & 2018-06-14 & 2018-05-04 & 69.27 & 124.32 & 200.44 & 0.697 & 0.049 & 0.078 & 0.62 & 2.95\\
+r3 & lisinopril / COUGH & 0.192 & NB & none & 2021-08-16 & none & 2020-12-24 & 2019-06-13 & 0.20 & 10.52 & -4.30 & 0.603 & 0.004 & -0.002 & -2.45 & 4.56\\
+r4 & atorvastatin / MYALGIA & 0.217 & NB & 2023-04-20 & 2022-05-02 & 2022-02-27 & 2021-05-31 & 2021-06-03 & 12.99 & 14.05 & 15.57 & 0.557 & 0.005 & 0.006 & 0.90 & 5.80\\
+r6 & isotretinoin / DEPRESSION & 0.557 & Hurdle-NB & none & 2019-09-13 & none & 2019-06-05 & 2019-04-17 & -1.39 & 15.98 & -3.17 & 0.284 & 0.006 & -0.001 & -5.05 & 43.49\\
+r8 & levothyroxine / ALOPECIA & 0.397 & Hurdle-NB & 2018-05-18 & 2018-08-03 & 2018-05-08 & 2018-05-04 & 2018-06-25 & 45.12 & -0.77 & 25.20 & 0.466 & 0.000 & 0.010 & -0.03 & 9.88\\
 \bottomrule
 \end{tabular}
 \end{table}

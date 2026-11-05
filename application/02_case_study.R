@@ -61,7 +61,8 @@ ll_pois <- as.numeric(logLik(fit_pois))
 ll_nb   <- if (!is.null(fit_nb)) as.numeric(logLik(fit_nb)) else NA_real_
 ll_hur  <- as.numeric(logLik(fit_hur))
 
-k_ols  <- length(coef(fit_ols))
+# FIX 4: k_ols must include sigma (Gaussian log-likelihood has p + 1 parameters)
+k_ols  <- length(coef(fit_ols)) + 1L
 k_pois <- length(coef(fit_pois))
 k_nb   <- if (!is.null(fit_nb)) length(coef(fit_nb)) + 1 else NA_integer_
 k_hur  <- length(fit_hur$coefficients$zero) + length(fit_hur$coefficients$count) + 1
@@ -92,7 +93,13 @@ cat(sprintf("Model matrix columns: %d, occurrence coefficients: %d, count coeffi
 sigma_ols <- summary(fit_ols)$sigma
 theta_nb  <- if (!is.null(fit_nb)) fit_nb$theta else NA_real_
 
-log_score_ols  <- -mean(dnorm(df_te$count, pred_ols_te, sigma_ols, log = TRUE))
+#The OLS model is Gaussian; to compare it with the count-model probabilities on the same footing, we compute the
+# probability it assigns to each integer via the discretized normal density P(Y = k) = Phi((k + 0.5 - mu)/sigma) - Phi((k - 0.5 - mu)/sigma).
+p_ols_te <- pnorm(df_te$count + 0.5, pred_ols_te, sigma_ols) -
+  pnorm(df_te$count - 0.5, pred_ols_te, sigma_ols)
+p_ols_te <- pmax(p_ols_te, 1e-300)
+log_score_ols  <- -mean(log(p_ols_te))
+
 log_score_pois <- -mean(dpois(df_te$count, pred_pois_te, log = TRUE))
 log_score_nb   <- if (!is.null(fit_nb)) {
   -mean(dnbinom(df_te$count, size = theta_nb, mu = pred_nb_te, log = TRUE))
@@ -122,7 +129,7 @@ ladder <- data.frame(
   OOS_log_score = round(c(log_score_ols, log_score_pois, log_score_nb, log_score_hur), 3)
 )
 write_table(ladder, "ladder",
-            caption = "Model ladder on the training window. In-sample log-likelihood, AIC and Pearson dispersion; out-of-sample mean negative log score on the monitoring window.")
+            caption = "Model ladder on the training window. In-sample log-likelihood, AIC and Pearson dispersion; out-of-sample mean negative log score on the monitoring window. The OLS log score uses the discretized normal density P(Y = k) = $\\Phi((k+1/2-\\mu)/\\sigma) - \\Phi((k-1/2-\\mu)/\\sigma)$ so that it is comparable to the count-model probabilities. The OLS AIC counts $\\sigma$ as a parameter (k = 7).")
 cat("Ladder:\n"); print(ladder); cat("\n")
 
 weekday_tr <- format(df_tr$date, "%u") %in% c("1","2","3","4","5")
@@ -172,13 +179,23 @@ eda <- data.frame(
   )
 )
 write_table(eda, "eda",
-            caption = "Exploratory statistics, case-study series.")
+            caption = "Exploratory statistics, case-study series (metformin / lactic acidosis).")
 cat("EDA:\n"); print(eda); cat("\n")
 
 sum_zero  <- summary(fit_hur)$coefficients$zero
 sum_count_full <- summary(fit_hur)$coefficients$count
 n_count_coef <- length(fit_hur$coefficients$count)
 sum_count <- sum_count_full[seq_len(n_count_coef), , drop = FALSE]
+
+# FIX 5: Wald test for H0: alpha_j = gamma_j. Because the hurdle likelihood
+# factorizes, the two heads are fitted independently and Cov(alpha_hat_j,
+# gamma_hat_j) = 0 asymptotically. So the test statistic is
+#   z_j = (alpha_hat_j - gamma_hat_j) / sqrt(se_alpha_j^2 + se_gamma_j^2)
+# which is approximately N(0, 1) under the null that the same covariate has
+# the same coefficient on both heads.
+wald_diff <- (sum_zero[, 1] - sum_count[, 1]) /
+  sqrt(sum_zero[, 2]^2 + sum_count[, 2]^2)
+wald_p    <- 2 * pnorm(-abs(wald_diff))
 
 coefs <- data.frame(
   Term      = rownames(sum_zero),
@@ -189,10 +206,12 @@ coefs <- data.frame(
   Mag_est   = round(sum_count[, 1], 3),
   Mag_se    = round(sum_count[, 2], 3),
   Mag_p     = round(sum_count[, 4], 4),
-  Mag_mr    = round(exp(sum_count[, 1]), 3)
+  Mag_mr    = round(exp(sum_count[, 1]), 3),
+  Wald_z    = round(wald_diff, 2),
+  Wald_p    = round(wald_p, 4)
 )
 write_table(coefs, "coefs",
-            caption = "Hurdle-NB coefficients, both heads. Odds ratios use $e^{\\hat\\alpha_j}$; mean ratios use $e^{\\hat\\gamma_j}$.")
+            caption = "Hurdle-NB coefficients, both heads. Odds ratios use $e^{\\hat\\alpha_j}$; mean ratios use $e^{\\hat\\gamma_j}$. The Wald columns test $H_0: \\alpha_j = \\gamma_j$ with $z_j = (\\hat\\alpha_j - \\hat\\gamma_j)/\\sqrt{\\widehat{\\mathrm{se}}(\\hat\\alpha_j)^2 + \\widehat{\\mathrm{se}}(\\hat\\gamma_j)^2}$, which is valid because the two heads are fitted independently and their coefficient estimates are asymptotically uncorrelated.")
 cat("Coefficients:\n"); print(coefs); cat("\n")
 
 rqr_hurdle_vec <- function(y, pi_pos, mu_ut, theta, rng_seed = NULL) {
@@ -309,7 +328,7 @@ monitor_tbl <- data.frame(
   ), 2)
 )
 write_table(monitor_tbl, "monitor",
-            caption = "First-alarm dates and terminal log e-process, case-study series, tolerant margin.")
+            caption = "First-alarm dates and terminal log e-process, case-study series, tolerant margin. Note that the head thresholds are $2/\\alpha \\approx 3.69$ and the whole-PIT threshold is $1/\\alpha \\approx 3.00$, so the whole-PIT fires at the easier threshold.")
 cat("Monitor:\n"); print(monitor_tbl); cat("\n")
 
 monthly <- d |>

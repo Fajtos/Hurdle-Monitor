@@ -1,18 +1,18 @@
 \begin{table}
 
-\caption{Hurdle-NB coefficients, both heads. Odds ratios use \$e\textasciicircum{}\{\textbackslash{}hat\textbackslash{}alpha\_j\}\$; mean ratios use \$e\textasciicircum{}\{\textbackslash{}hat\textbackslash{}gamma\_j\}\$.}
+\caption{Hurdle-NB coefficients, both heads. Odds ratios use \$e\textasciicircum{}\{\textbackslash{}hat\textbackslash{}alpha\_j\}\$; mean ratios use \$e\textasciicircum{}\{\textbackslash{}hat\textbackslash{}gamma\_j\}\$. The Wald columns test \$H\_0: \textbackslash{}alpha\_j = \textbackslash{}gamma\_j\$ with \$z\_j = (\textbackslash{}hat\textbackslash{}alpha\_j - \textbackslash{}hat\textbackslash{}gamma\_j)/\textbackslash{}sqrt\{\textbackslash{}widehat\{\textbackslash{}mathrm\{se\}\}(\textbackslash{}hat\textbackslash{}alpha\_j)\textasciicircum{}2 + \textbackslash{}widehat\{\textbackslash{}mathrm\{se\}\}(\textbackslash{}hat\textbackslash{}gamma\_j)\textasciicircum{}2\}\$, which is valid because the two heads are fitted independently and their coefficient estimates are asymptotically uncorrelated.}
 \centering
-\begin{tabular}[t]{llrrrrrrrr}
+\begin{tabular}[t]{llrrrrrrrrrr}
 \toprule
-  & Term & Occ\_est & Occ\_se & Occ\_p & Occ\_or & Mag\_est & Mag\_se & Mag\_p & Mag\_mr\\
+  & Term & Occ\_est & Occ\_se & Occ\_p & Occ\_or & Mag\_est & Mag\_se & Mag\_p & Mag\_mr & Wald\_z & Wald\_p\\
 \midrule
-(Intercept) & (Intercept) & 0.216 & 0.139 & 0.122 & 1.241 & -0.002 & 0.106 & 0.986 & 0.998\\
-sin\_year & sin\_year & -0.007 & 0.080 & 0.933 & 0.993 & 0.086 & 0.048 & 0.075 & 1.090\\
-cos\_year & cos\_year & -0.005 & 0.079 & 0.953 & 0.995 & 0.094 & 0.049 & 0.053 & 1.099\\
-weekend & weekend & -3.435 & 0.147 & 0.000 & 0.032 & -1.252 & 0.196 & 0.000 & 0.286\\
-y\_lag & y\_lag & 0.143 & 0.089 & 0.110 & 1.153 & 0.089 & 0.050 & 0.074 & 1.093\\
+(Intercept) & (Intercept) & 0.216 & 0.139 & 0.122 & 1.241 & -0.002 & 0.106 & 0.986 & 0.998 & 1.24 & 0.213\\
+sin\_year & sin\_year & -0.007 & 0.080 & 0.933 & 0.993 & 0.086 & 0.048 & 0.075 & 1.090 & -0.99 & 0.321\\
+cos\_year & cos\_year & -0.005 & 0.079 & 0.953 & 0.995 & 0.094 & 0.049 & 0.053 & 1.099 & -1.06 & 0.287\\
+weekend & weekend & -3.435 & 0.147 & 0.000 & 0.032 & -1.252 & 0.196 & 0.000 & 0.286 & -8.92 & 0.000\\
+y\_lag & y\_lag & 0.143 & 0.089 & 0.110 & 1.153 & 0.089 & 0.050 & 0.074 & 1.093 & 0.52 & 0.600\\
 \addlinespace
-y\_roll7 & y\_roll7 & 1.098 & 0.162 & 0.000 & 3.000 & 0.637 & 0.094 & 0.000 & 1.891\\
+y\_roll7 & y\_roll7 & 1.098 & 0.162 & 0.000 & 3.000 & 0.637 & 0.094 & 0.000 & 1.891 & 2.46 & 0.014\\
 \bottomrule
 \end{tabular}
 \end{table}

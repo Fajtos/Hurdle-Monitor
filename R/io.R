@@ -23,8 +23,26 @@ write_table <- function(df, name, caption = NULL, digits = 3) {
 save_figure <- function(plot, name, width = 8, height = 4.5) {
   root <- get_out_root()
   dir.create(file.path(root, "figures"), recursive = TRUE, showWarnings = FALSE)
-  ggplot2::ggsave(file.path(root, "figures", paste0(name, ".pdf")), plot,
-                  width = width, height = height, device = grDevices::cairo_pdf)
+  path <- file.path(root, "figures", paste0(name, ".pdf"))
+  
+  if (file.exists(path)) try(file.remove(path), silent = TRUE)
+  
+  
+  try_device <- function(dev, ...) {
+    tryCatch({
+      ggplot2::ggsave(path, plot, width = width, height = height,
+                      device = dev, ...)
+      TRUE
+    }, error = function(e) {
+      message("  device failed for ", name, ": ", conditionMessage(e))
+      FALSE
+    })
+  }
+  
+  if (try_device(grDevices::cairo_pdf)) return(invisible(path))
+  if (try_device(grDevices::pdf))       return(invisible(path))
+  
+  stop("Could not save figure to ", path)
 }
 
 save_raw <- function(obj, name) {

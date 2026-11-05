@@ -3,7 +3,6 @@
 # Writes:   out/application/tables/panel.{csv,tex}
 #           out/application/raw/panel_raw.rds
 
-
 source("R/io.R")
 set_out_root("out/application")
 source("R/eprocess.R")
@@ -97,7 +96,6 @@ for (i in seq_len(nrow(panel))) {
   }
   
   form  <- count ~ sin_year + cos_year + weekend + y_lag + y_roll7
-  X_tr  <- model.matrix(form, df_tr)
   X_te  <- model.matrix(form, df_te)
   
   fit_ols  <- lm(form, data = df_tr)
@@ -131,7 +129,11 @@ for (i in seq_len(nrow(panel))) {
   theta_hur <- pred_h$theta
   q0_te     <- (theta_hur / (theta_hur + mu_ut_te))^theta_hur
   
-  oos_ols  <- -mean(dnorm(df_te$count, pred_ols, sigma_ols, log = TRUE))
+  # OLS log score on the same discretized basis as 02_case_study.R
+  p_ols_te <- pnorm(df_te$count + 0.5, pred_ols, sigma_ols) -
+    pnorm(df_te$count - 0.5, pred_ols, sigma_ols)
+  p_ols_te <- pmax(p_ols_te, 1e-300)
+  oos_ols  <- -mean(log(p_ols_te))
   oos_pois <- -mean(dpois(df_te$count, pred_pois, log = TRUE))
   oos_nb   <- if (!is.null(fit_nb)) {
     -mean(dnbinom(df_te$count, size = theta_nb, mu = pred_nb, log = TRUE))
@@ -175,6 +177,14 @@ for (i in seq_len(nrow(panel))) {
   cat(sprintf("  Alarms (strict):   occ=%s mag=%s\n",
               occ_strict_date, mag_strict_date))
   
+  # Diagnostic columns for the dilution discussion
+  T_monitor <- length(df_te$count)
+  rate_mag  <- logE_mag_tol[T_monitor] / T_monitor
+  rate_whole <- logE_whole_tol[T_monitor] / T_monitor
+  pi_mean   <- mean(pi_pos_te)
+  pi_inv_cubed <- pi_mean^(-3)
+  rate_ratio <- if (abs(rate_whole) > 1e-9) rate_mag / rate_whole else NA_real_
+  
   rows[[length(rows) + 1]] <- data.frame(
     id = id,
     series = paste(panel$drug[i], panel$reaction[i], sep = " / "),
@@ -187,14 +197,19 @@ for (i in seq_len(nrow(panel))) {
     mag_strict = mag_strict_date,
     occ_terminal   = round(logE_occ_tol[length(logE_occ_tol)], 2),
     mag_terminal   = round(logE_mag_tol[length(logE_mag_tol)], 2),
-    whole_terminal = round(logE_whole_tol[length(logE_whole_tol)], 2)
+    whole_terminal = round(logE_whole_tol[length(logE_whole_tol)], 2),
+    pi_mean        = round(pi_mean, 3),
+    rate_mag       = round(rate_mag, 5),
+    rate_whole     = round(rate_whole, 5),
+    rate_ratio     = round(rate_ratio, 2),
+    pi_inv_cubed   = round(pi_inv_cubed, 2)
   )
 }
 
 panel_tbl <- do.call(rbind, rows)
 
 write_table(panel_tbl, "panel",
-            caption = "Panel of first-alarm dates and terminal log e-process for the five retained series under tolerant and strict margins. The OOS winner column reports the model with the lowest out-of-sample log score among OLS, Poisson, NB, and Hurdle-NB.")
+            caption = "Panel of first-alarm dates and terminal log e-process for the five retained series under tolerant and strict margins. The OOS winner column reports the model with the lowest out-of-sample log score among OLS, Poisson, NB, and Hurdle-NB. The rate columns give the mean per-day log e-process growth (terminal log E divided by the monitoring-window length) for the magnitude head and the whole-PIT test, and rate\\_ratio is their ratio. $\\pi$\\_mean is the mean of the fitted occurrence probability over the monitoring window; $\\pi^{-3}$ is the dilution factor Proposition 1 predicts for the growth-rate ratio under a magnitude-only alternative with constant $\\pi$. The observed ratio only matches the theoretical prediction when both rates are positive; where the whole-PIT rate is negative, the theoretical comparison does not apply and the whole-PIT has accumulated evidence \\emph{against} a drift.")
 
 cat("\n=== Panel summary ===\n\n")
 print(panel_tbl, row.names = FALSE)
