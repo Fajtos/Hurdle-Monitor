@@ -1,0 +1,13 @@
+"id","flagged","other_also_alarmed","alarm_date","arm","post_days","occ_alarm","mag_alarm","occ_terminal","mag_terminal","post_logscore"
+"r2","magnitude",TRUE,"2018-06-07","A0 no refit",2399,"2019-02-03","2018-08-08",64.82,116,2.41
+"r2","magnitude",TRUE,"2018-06-07","B refit flagged head",2399,"2019-02-03","2018-08-20",64.82,25.52,2.369
+"r2","magnitude",TRUE,"2018-06-07","C refit other head",2399,"2021-09-18","2018-08-08",4.58,116,2.376
+"r2","magnitude",TRUE,"2018-06-07","D refit both heads",2399,"2021-09-18","2018-08-20",4.58,25.52,2.336
+"r3","magnitude",FALSE,"2021-08-16","A0 no refit",1233,"none","2022-11-29",0.07,7.66,1.41
+"r3","magnitude",FALSE,"2021-08-16","B refit flagged head",1233,"none","none",0.07,-1.85,1.37
+"r3","magnitude",FALSE,"2021-08-16","C refit other head",1233,"none","2022-11-29",-1.66,7.66,1.391
+"r3","magnitude",FALSE,"2021-08-16","D refit both heads",1233,"none","none",-1.66,-1.85,1.352
+"r6","magnitude",FALSE,"2019-09-13","A0 no refit",1936,"none","2022-04-26",2.73,6.15,1.01
+"r6","magnitude",FALSE,"2019-09-13","B refit flagged head",1936,"none","none",2.73,2.15,1.326
+"r6","magnitude",FALSE,"2019-09-13","C refit other head",1936,"2022-08-26","2022-04-26",24.07,6.15,0.993
+"r6","magnitude",FALSE,"2019-09-13","D refit both heads",1936,"2022-08-26","none",24.07,2.15,1.309

@@ -1,0 +1,16 @@
+\begin{table}
+
+\caption{AIC-corrected Vuong test of hurdle-NB against the NB GLM on the training window (two-sided; |z|<1.96 means neither model is preferred).}
+\centering
+\begin{tabular}[t]{llrrl}
+\toprule
+id & series & vuong\_z & p\_two\_sided & favours\\
+\midrule
+r2 & metformin / LACTIC ACIDOSIS & 2.26 & 0.024 & hurdle-NB\\
+r3 & lisinopril / COUGH & 2.17 & 0.030 & hurdle-NB\\
+r4 & atorvastatin / MYALGIA & 0.48 & 0.634 & neither\\
+r6 & isotretinoin / DEPRESSION & 1.70 & 0.090 & neither\\
+r8 & levothyroxine / ALOPECIA & 5.40 & 0.000 & hurdle-NB\\
+\bottomrule
+\end{tabular}
+\end{table}

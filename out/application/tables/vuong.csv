@@ -1,0 +1,6 @@
+"id","series","vuong_z","p_two_sided","favours"
+"r2","metformin / LACTIC ACIDOSIS",2.26,0.0241,"hurdle-NB"
+"r3","lisinopril / COUGH",2.17,0.03,"hurdle-NB"
+"r4","atorvastatin / MYALGIA",0.48,0.6338,"neither"
+"r6","isotretinoin / DEPRESSION",1.7,0.0897,"neither"
+"r8","levothyroxine / ALOPECIA",5.4,0,"hurdle-NB"

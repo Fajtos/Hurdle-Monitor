@@ -1,0 +1,25 @@
+\begin{table}
+
+\caption{Head-specific refit on the series with a baseline alarm. From the first-alarm date, four arms are monitored on the same post-alarm window with fresh e-processes and the same PIT seed. Refit window: last 500 days ending at the alarm. post\textbackslash{}\_logscore is the mean negative log score on the post-alarm window (lower is better).}
+\centering
+\begin{tabular}[t]{lllllrllrrr}
+\toprule
+id & flagged & other\_also\_alarmed & alarm\_date & arm & post\_days & occ\_alarm & mag\_alarm & occ\_terminal & mag\_terminal & post\_logscore\\
+\midrule
+r2 & magnitude & TRUE & 2018-06-07 & A0 no refit & 2399 & 2019-02-03 & 2018-08-08 & 64.82 & 116.00 & 2.410\\
+r2 & magnitude & TRUE & 2018-06-07 & B refit flagged head & 2399 & 2019-02-03 & 2018-08-20 & 64.82 & 25.52 & 2.369\\
+r2 & magnitude & TRUE & 2018-06-07 & C refit other head & 2399 & 2021-09-18 & 2018-08-08 & 4.58 & 116.00 & 2.376\\
+r2 & magnitude & TRUE & 2018-06-07 & D refit both heads & 2399 & 2021-09-18 & 2018-08-20 & 4.58 & 25.52 & 2.336\\
+r3 & magnitude & FALSE & 2021-08-16 & A0 no refit & 1233 & none & 2022-11-29 & 0.07 & 7.66 & 1.410\\
+\addlinespace
+r3 & magnitude & FALSE & 2021-08-16 & B refit flagged head & 1233 & none & none & 0.07 & -1.85 & 1.370\\
+r3 & magnitude & FALSE & 2021-08-16 & C refit other head & 1233 & none & 2022-11-29 & -1.66 & 7.66 & 1.391\\
+r3 & magnitude & FALSE & 2021-08-16 & D refit both heads & 1233 & none & none & -1.66 & -1.85 & 1.352\\
+r6 & magnitude & FALSE & 2019-09-13 & A0 no refit & 1936 & none & 2022-04-26 & 2.73 & 6.15 & 1.010\\
+r6 & magnitude & FALSE & 2019-09-13 & B refit flagged head & 1936 & none & none & 2.73 & 2.15 & 1.326\\
+\addlinespace
+r6 & magnitude & FALSE & 2019-09-13 & C refit other head & 1936 & 2022-08-26 & 2022-04-26 & 24.07 & 6.15 & 0.993\\
+r6 & magnitude & FALSE & 2019-09-13 & D refit both heads & 1936 & 2022-08-26 & none & 24.07 & 2.15 & 1.309\\
+\bottomrule
+\end{tabular}
+\end{table}

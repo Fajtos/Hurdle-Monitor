@@ -7,6 +7,7 @@
 source("R/io.R")
 set_out_root("out/application")
 source("R/eprocess.R")
+source("R/helpers.R")
 
 suppressPackageStartupMessages({
   library(dplyr)
@@ -95,10 +96,7 @@ theta_nb  <- if (!is.null(fit_nb)) fit_nb$theta else NA_real_
 
 #The OLS model is Gaussian; to compare it with the count-model probabilities on the same footing, we compute the
 # probability it assigns to each integer via the discretized normal density P(Y = k) = Phi((k + 0.5 - mu)/sigma) - Phi((k - 0.5 - mu)/sigma).
-p_ols_te <- pnorm(df_te$count + 0.5, pred_ols_te, sigma_ols) -
-  pnorm(df_te$count - 0.5, pred_ols_te, sigma_ols)
-p_ols_te <- pmax(p_ols_te, 1e-300)
-log_score_ols  <- -mean(log(p_ols_te))
+log_score_ols <- ols_disc_logscore(df_te$count, pred_ols_te, sigma_ols)
 
 log_score_pois <- -mean(dpois(df_te$count, pred_pois_te, log = TRUE))
 log_score_nb   <- if (!is.null(fit_nb)) {

@@ -6,6 +6,7 @@
 source("R/io.R")
 set_out_root("out/application")
 source("R/eprocess.R")
+source("R/helpers.R")
 source("R/forecast.R")
 
 suppressPackageStartupMessages({
@@ -130,10 +131,7 @@ for (i in seq_len(nrow(panel))) {
   q0_te     <- (theta_hur / (theta_hur + mu_ut_te))^theta_hur
   
   # OLS log score on the same discretized basis as 02_case_study.R
-  p_ols_te <- pnorm(df_te$count + 0.5, pred_ols, sigma_ols) -
-    pnorm(df_te$count - 0.5, pred_ols, sigma_ols)
-  p_ols_te <- pmax(p_ols_te, 1e-300)
-  oos_ols  <- -mean(log(p_ols_te))
+  oos_ols <- ols_disc_logscore(df_te$count, pred_ols, sigma_ols)
   oos_pois <- -mean(dpois(df_te$count, pred_pois, log = TRUE))
   oos_nb   <- if (!is.null(fit_nb)) {
     -mean(dnbinom(df_te$count, size = theta_nb, mu = pred_nb, log = TRUE))
