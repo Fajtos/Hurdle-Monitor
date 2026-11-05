@@ -1,0 +1,6 @@
+"id","drug","reaction","total","weekday_zero_train","positive_mean_train","max_count","first_date","last_date","n_days"
+"r2","metformin","LACTIC ACIDOSIS",15121,0.216,3.07,64,"2012-01-01","2024-12-31",4749
+"r3","lisinopril","COUGH",6837,0.192,2.67,38,"2012-01-01","2024-12-31",4749
+"r4","atorvastatin","MYALGIA",5299,0.217,2.27,35,"2012-01-01","2024-12-31",4749
+"r6","isotretinoin","DEPRESSION",3329,0.557,2.95,121,"2012-01-01","2024-12-31",4749
+"r8","levothyroxine","ALOPECIA",6276,0.397,2.39,208,"2012-01-01","2024-12-31",4749

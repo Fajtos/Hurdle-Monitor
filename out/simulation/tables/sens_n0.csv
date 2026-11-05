@@ -1,0 +1,9 @@
+"n0","margin","occ_false_alarm_rate","mag_false_alarm_rate","n"
+500,"strict",0.435,0.2975,400
+500,"tolerant",0.0475,0.045,400
+1000,"strict",0.225,0.1275,400
+1000,"tolerant",0.0075,0.0025,400
+2000,"strict",0.0825,0.04,400
+2000,"tolerant",0.0025,0,400
+4000,"strict",0.045,0.0225,400
+4000,"tolerant",0,0,400

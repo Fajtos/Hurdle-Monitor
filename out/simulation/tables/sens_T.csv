@@ -1,0 +1,9 @@
+"T_monitor","margin","occ_false_alarm_rate","mag_false_alarm_rate","n"
+1000,"strict",0.015,0.0075,400
+1000,"tolerant",0,0,400
+2000,"strict",0.0575,0.035,400
+2000,"tolerant",0.005,0.0025,400
+3000,"strict",0.0825,0.04,400
+3000,"tolerant",0.0025,0,400
+5000,"strict",0.2,0.1025,400
+5000,"tolerant",0,0.01,400

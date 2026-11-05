@@ -1,0 +1,16 @@
+\begin{table}
+
+\caption{Panel of first-alarm dates and terminal log e-process for the five retained series under tolerant and strict margins. The OOS winner column reports the model with the lowest out-of-sample log score among OLS, Poisson, NB, and Hurdle-NB.}
+\centering
+\begin{tabular}[t]{llrllllllrrr}
+\toprule
+id & series & zero\_share & oos\_winner & occ\_tol & mag\_tol & whole\_tol & occ\_strict & mag\_strict & occ\_terminal & mag\_terminal & whole\_terminal\\
+\midrule
+r2 & metformin / LACTIC ACIDOSIS & 0.216 & Hurdle-NB & none & 2019-04-17 & 2019-04-28 & 2021-07-19 & 2018-09-12 & -2.63 & 25.53 & 10.32\\
+r3 & lisinopril / COUGH & 0.192 & Poisson & none & 2021-06-03 & none & 2020-11-09 & 2019-05-24 & 0.94 & 10.07 & -4.96\\
+r4 & atorvastatin / MYALGIA & 0.217 & Hurdle-NB & none & none & none & 2024-07-27 & 2022-08-19 & -3.09 & 1.11 & -4.45\\
+r6 & isotretinoin / DEPRESSION & 0.557 & Hurdle-NB & none & 2021-05-22 & none & none & 2020-09-09 & -3.59 & 2.28 & -5.18\\
+r8 & levothyroxine / ALOPECIA & 0.397 & Hurdle-NB & none & 2018-11-26 & none & none & 2018-09-10 & -3.49 & 24.63 & -2.80\\
+\bottomrule
+\end{tabular}
+\end{table}

@@ -1,0 +1,3 @@
+"shift","mag_detect_rate","whole_detect_rate","detection_ratio","mag_delay_median","whole_delay_median","mean_logE_mag","mean_logE_whole","theoretical_ratio","n"
+"moderate",0.815,0.075,10.87,1267,1579,9.34,-1.11,22.34,400
+"small",0.132,0.015,8.83,1351,1495,0.23,-3.5,22.82,400

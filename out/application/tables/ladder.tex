@@ -1,0 +1,15 @@
+\begin{table}
+
+\caption{Model ladder on the training window. In-sample log-likelihood, AIC and Pearson dispersion; out-of-sample mean negative log score on the monitoring window.}
+\centering
+\begin{tabular}[t]{lrrrrr}
+\toprule
+Model & Params & LogLik & AIC & Pearson\_dispersion & OOS\_log\_score\\
+\midrule
+OLS (Gaussian) & 6 & -4865.0 & 9741.9 & NA & 3.964\\
+Poisson GLM & 6 & -3417.6 & 6847.2 & 2.11 & 2.774\\
+NB GLM & 7 & -3193.6 & 6401.2 & 1.42 & 2.273\\
+Hurdle-NB (proposed) & 13 & -3154.3 & 6334.6 & NA & 2.226\\
+\bottomrule
+\end{tabular}
+\end{table}

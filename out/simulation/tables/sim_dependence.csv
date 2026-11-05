@@ -1,0 +1,5 @@
+"forecaster","scenario","occ_rate","mag_rate","n"
+"with_lag","null",0,0.005,200
+"with_lag","occ_pos",0.99,0.01,200
+"without_lag","null",1,0.01,200
+"without_lag","occ_pos",1,0.045,200

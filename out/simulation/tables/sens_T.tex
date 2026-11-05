@@ -1,0 +1,20 @@
+\begin{table}
+
+\caption{Sensitivity of the null false-alarm rate to the monitoring-window length. Null scenario, estimated forecaster, training window fixed at 2000 days, 400 replications per cell, same seed stream as the main simulation.}
+\centering
+\begin{tabular}[t]{rlrrr}
+\toprule
+T\_monitor & margin & occ\_false\_alarm\_rate & mag\_false\_alarm\_rate & n\\
+\midrule
+1000 & strict & 0.015 & 0.007 & 400\\
+1000 & tolerant & 0.000 & 0.000 & 400\\
+2000 & strict & 0.058 & 0.035 & 400\\
+2000 & tolerant & 0.005 & 0.002 & 400\\
+3000 & strict & 0.082 & 0.040 & 400\\
+\addlinespace
+3000 & tolerant & 0.002 & 0.000 & 400\\
+5000 & strict & 0.200 & 0.102 & 400\\
+5000 & tolerant & 0.000 & 0.010 & 400\\
+\bottomrule
+\end{tabular}
+\end{table}

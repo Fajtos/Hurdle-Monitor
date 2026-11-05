@@ -1,0 +1,16 @@
+"delta","scenario","occ_rate","mag_rate","occ_delay_median","mag_delay_median"
+0,"null",0.11,0.06,NA,NA
+0,"occ_pos",1,0.08,551,1371
+0,"mag_large",0.1,1,305,286
+0.01,"null",0.01,0.03,NA,NA
+0.01,"occ_pos",1,0.04,731,NA
+0.01,"mag_large",0.02,1,NA,329
+0.02,"null",0.01,0.01,NA,NA
+0.02,"occ_pos",1,0.02,972,NA
+0.02,"mag_large",0.01,1,NA,387
+0.03,"null",0,0.01,NA,NA
+0.03,"occ_pos",0.95,0.01,1173,NA
+0.03,"mag_large",0,1,NA,429
+0.05,"null",0,0,NA,NA
+0.05,"occ_pos",0.45,0,1619,NA
+0.05,"mag_large",0,1,NA,527

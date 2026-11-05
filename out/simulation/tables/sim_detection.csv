@@ -1,0 +1,7 @@
+"scenario_label","occ_detect_rate","mag_detect_rate","occ_delay_median","mag_delay_median","localization_correct","n"
+"Both shifted",0.993,0.94,877,954,0.932,400
+"Dispersion",0,0.002,NA,NA,0.998,400
+"Magnitude large",0.002,1,NA,430,0.998,400
+"Magnitude moderate",0.005,0.8,NA,1214,0.797,400
+"Occurrence negative",0.963,0,1121,NA,0.963,400
+"Occurrence positive",0.99,0,859,NA,0.99,400

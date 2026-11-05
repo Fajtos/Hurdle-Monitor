@@ -1,0 +1,7 @@
+"Statistic","Value"
+"RQR mean","-0.084"
+"RQR variance","0.856"
+"RQR lag-1 autocorrelation","0.203"
+"Fraction inside 95% envelope","0.961"
+"Observed zeros in monitoring window","488"
+"Expected zeros in monitoring window","490.2"

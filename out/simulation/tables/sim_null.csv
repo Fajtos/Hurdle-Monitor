@@ -1,0 +1,5 @@
+"forecaster","margin","occ_false_alarm_rate","mag_false_alarm_rate","occ_early_rate","mag_early_rate","n"
+"Estimated","strict",0.0825,0.04,0.025,0.0125,400
+"Estimated","tolerant",0.0025,0,0.0025,0,400
+"Oracle","strict",0.015,0.01,0.01,0.005,400
+"Oracle","tolerant",0,0,0,0,400

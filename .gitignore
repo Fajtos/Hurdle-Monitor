@@ -1,0 +1,9 @@
+.Rproj.user/
+.Rhistory
+.RData
+.Ruserdata
+.Renviron
+.httr-oauth
+renv/library/
+out/simulation/raw/
+out/application/raw/

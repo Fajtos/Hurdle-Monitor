@@ -1,0 +1,18 @@
+\begin{table}
+
+\caption{Detection and localization under the tolerant margin, estimated forecaster.}
+\centering
+\begin{tabular}[t]{lrrrrrr}
+\toprule
+scenario\_label & occ\_detect\_rate & mag\_detect\_rate & occ\_delay\_median & mag\_delay\_median & localization\_correct & n\\
+\midrule
+Both shifted & 0.993 & 0.940 & 877 & 954 & 0.932 & 400\\
+Dispersion & 0.000 & 0.002 & NA & NA & 0.998 & 400\\
+Magnitude large & 0.002 & 1.000 & NA & 430 & 0.998 & 400\\
+Magnitude moderate & 0.005 & 0.800 & NA & 1214 & 0.797 & 400\\
+Occurrence negative & 0.963 & 0.000 & 1121 & NA & 0.963 & 400\\
+\addlinespace
+Occurrence positive & 0.990 & 0.000 & 859 & NA & 0.990 & 400\\
+\bottomrule
+\end{tabular}
+\end{table}
