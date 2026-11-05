@@ -3,6 +3,7 @@
 #           classical diagnostics (RQR, envelope, Cook's distance), and the
 #           two-head monitor (occurrence, magnitude, whole-forecast PIT).
 
+
 source("R/io.R")
 set_out_root("out/application")
 source("R/eprocess.R")
@@ -31,9 +32,9 @@ d$sin_year <- sin(2 * pi * doy / 365.25)
 d$cos_year <- cos(2 * pi * doy / 365.25)
 d$weekend  <- as.integer(format(d$date, "%u") %in% c("6", "7"))
 d$y_lag    <- c(0, log1p(d$count[-n]))
-roll7 <- as.numeric(stats::filter(log1p(d$count), rep(1/7, 7), sides = 1))
+roll7 <- as.numeric(stats::filter(d$count, rep(1/7, 7), sides = 1))
 roll7[is.na(roll7)] <- 0
-d$y_roll7 <- roll7
+d$y_roll7 <- log1p(c(0, roll7[-n]))
 
 n0    <- sum(d$date <= TRAIN_END)
 df_tr <- d[1:n0, ]
@@ -75,22 +76,15 @@ pred_pois_te <- predict(fit_pois, newdata = df_te, type = "response")
 pred_nb_te   <- if (!is.null(fit_nb)) predict(fit_nb, newdata = df_te, type = "response") else rep(NA_real_, nrow(df_te))
 
 X_te <- model.matrix(form, df_te)
-X_tr <- model.matrix(form, df_tr)
 
 coef_zero  <- fit_hur$coefficients$zero
 coef_count <- fit_hur$coefficients$count
 theta_hur  <- as.numeric(fit_hur$theta)
 
-pi_raw_tr <- as.numeric(plogis(X_tr %*% coef_zero))
-emp_pi_pos_tr <- mean(df_tr$count > 0)
-if (abs(mean(pi_raw_tr) - emp_pi_pos_tr) < abs(mean(1 - pi_raw_tr) - emp_pi_pos_tr)) {
-  pi_pos_te <- as.numeric(plogis(X_te %*% coef_zero))
-} else {
-  pi_pos_te <- 1 - as.numeric(plogis(X_te %*% coef_zero))
-}
-mu_ut_te <- as.numeric(exp(X_te %*% coef_count))
-q0_te    <- (theta_hur / (theta_hur + mu_ut_te))^theta_hur
-mpos_te  <- mu_ut_te / (1 - q0_te)
+pi_pos_te <- as.numeric(plogis(X_te %*% coef_zero))
+mu_ut_te  <- as.numeric(exp(X_te %*% coef_count))
+q0_te     <- (theta_hur / (theta_hur + mu_ut_te))^theta_hur
+mpos_te   <- mu_ut_te / (1 - q0_te)
 
 cat(sprintf("Model matrix columns: %d, occurrence coefficients: %d, count coefficients: %d\n\n",
             ncol(X_te), length(coef_zero), length(coef_count)))
@@ -378,3 +372,5 @@ save_raw(list(
   pi_pos_te = pi_pos_te, mu_ut_te = mu_ut_te, theta_hur = theta_hur,
   logE_occ = logE_occ, logE_mag = logE_mag, logE_whole = logE_whole
 ), sprintf("case_%s", CASE_ID))
+
+cat("All outputs written to out/application/.\n")

@@ -8,6 +8,7 @@
 #   data/faers/README.md
 #   data/faers/checksums.txt
 
+
 suppressPackageStartupMessages({
   library(digest)
 })
@@ -39,7 +40,7 @@ for (i in seq_len(nrow(panel))) {
     total = sum(d$count),
     weekday_zero_train = round(mean(wd_train == 0), 3),
     positive_mean_train = round(mean(pos_train), 2),
-    max_count = max(d$count),
+    max_count_train = max(d$count[d$date <= TRAIN_END]),
     first_date = as.character(min(d$date)),
     last_date = as.character(max(d$date)),
     n_days = nrow(d)
@@ -48,7 +49,7 @@ for (i in seq_len(nrow(panel))) {
 
 overview <- do.call(rbind, rows)
 write_table(overview, "data_overview",
-            caption = "Panel of FAERS drug-reaction series. Weekday zero share and positive-count mean are computed on the training window, 2012-01-01 to 2017-12-31.")
+            caption = "Panel of FAERS drug-reaction series. Total reports, first date, last date, and n\\_days are over the full window 2012-01-01 to 2024-12-31. Weekday zero share, positive-count mean, and maximum count are computed on the training window 2012-01-01 to 2017-12-31.")
 
 cat("\nData overview:\n\n")
 print(overview, row.names = FALSE)
@@ -57,7 +58,7 @@ readme <- c(
   "# FAERS panel data",
   "",
   sprintf("Retrieved: %s", format(Sys.Date(), "%Y-%m-%d")),
-  sprintf("Source: openFDA drug-event endpoint, https://api.fda.gov/drug/event.json"),
+  "Source: openFDA drug-event endpoint, https://api.fda.gov/drug/event.json",
   "",
   "## Files",
   "",
@@ -92,3 +93,8 @@ files <- list.files("data/faers", pattern = "\\.csv$", full.names = TRUE)
 checks <- sapply(files, function(f) digest::digest(f, algo = "sha256", file = TRUE))
 checksum_lines <- sprintf("%s  %s", checks, basename(files))
 writeLines(checksum_lines, "data/faers/checksums.txt")
+
+cat("\nDocumentation written:\n")
+cat("  out/application/tables/data_overview.tex and .csv\n")
+cat("  data/faers/README.md\n")
+cat("  data/faers/checksums.txt\n")

@@ -42,18 +42,12 @@ rqr_hurdle_vec <- function(y, pi_pos, mu_ut, theta, rng_seed = NULL) {
   qnorm(U)
 }
 
-predict_hurdle <- function(fit_hur, X_tr, X_te, y_tr) {
+predict_hurdle <- function(fit_hur, X_te) {
   coef_zero  <- fit_hur$coefficients$zero
   coef_count <- fit_hur$coefficients$count
   theta_hur  <- as.numeric(fit_hur$theta)
-  pi_raw_tr  <- as.numeric(plogis(X_tr %*% coef_zero))
-  emp_pos_tr <- mean(y_tr > 0)
-  if (abs(mean(pi_raw_tr) - emp_pos_tr) < abs(mean(1 - pi_raw_tr) - emp_pos_tr)) {
-    pi_pos_te <- as.numeric(plogis(X_te %*% coef_zero))
-  } else {
-    pi_pos_te <- 1 - as.numeric(plogis(X_te %*% coef_zero))
-  }
-  mu_ut_te <- as.numeric(exp(X_te %*% coef_count))
+  pi_pos_te <- as.numeric(plogis(X_te %*% coef_zero))
+  mu_ut_te  <- as.numeric(exp(X_te %*% coef_count))
   list(pi_pos = pi_pos_te, mu_ut = mu_ut_te, theta = theta_hur)
 }
 
@@ -85,9 +79,9 @@ for (i in seq_len(nrow(panel))) {
   d$cos_year <- cos(2 * pi * doy / 365.25)
   d$weekend  <- as.integer(format(d$date, "%u") %in% c("6", "7"))
   d$y_lag    <- c(0, log1p(d$count[-n]))
-  roll7 <- as.numeric(stats::filter(log1p(d$count), rep(1/7, 7), sides = 1))
+  roll7 <- as.numeric(stats::filter(d$count, rep(1/7, 7), sides = 1))
   roll7[is.na(roll7)] <- 0
-  d$y_roll7 <- roll7
+  d$y_roll7 <- log1p(c(0, roll7[-n]))
   
   n0    <- sum(d$date <= TRAIN_END)
   df_tr <- d[1:n0, ]
@@ -131,7 +125,7 @@ for (i in seq_len(nrow(panel))) {
     predict(fit_nb, newdata = df_te, type = "response")
   } else rep(NA_real_, nrow(df_te))
   
-  pred_h    <- predict_hurdle(fit_hur, X_tr, X_te, df_tr$count)
+  pred_h    <- predict_hurdle(fit_hur, X_te)
   pi_pos_te <- pred_h$pi_pos
   mu_ut_te  <- pred_h$mu_ut
   theta_hur <- pred_h$theta

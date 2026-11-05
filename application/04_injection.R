@@ -14,6 +14,7 @@
 # Usage (from the project root):
 #   source("application/04_injection.R")
 
+
 source("R/io.R")
 set_out_root("out/application")
 source("R/eprocess.R")
@@ -55,7 +56,6 @@ fit_and_forecast <- function(df_tr, df_te, form) {
                         NULL
                       })
   if (is.null(fit_hur)) return(NULL)
-  X_tr <- model.matrix(form, df_tr)
   X_te <- model.matrix(form, df_te)
   coef_zero  <- fit_hur$coefficients$zero
   coef_count <- fit_hur$coefficients$count
@@ -114,9 +114,9 @@ for (i in seq_len(nrow(panel))) {
   d$cos_year <- cos(2 * pi * doy / 365.25)
   d$weekend  <- as.integer(format(d$date, "%u") %in% c("6", "7"))
   d$y_lag    <- c(0, log1p(d$count[-n]))
-  roll7 <- as.numeric(stats::filter(log1p(d$count), rep(1/7, 7), sides = 1))
+  roll7 <- as.numeric(stats::filter(d$count, rep(1/7, 7), sides = 1))
   roll7[is.na(roll7)] <- 0
-  d$y_roll7 <- roll7
+  d$y_roll7 <- log1p(c(0, roll7[-n]))
   
   n0    <- sum(d$date <= TRAIN_END)
   df_tr <- d[1:n0, ]
@@ -142,10 +142,8 @@ for (i in seq_len(nrow(panel))) {
                        dates_te, PIT_SEED)
   
   cat(sprintf("  Baseline:  occ=%s mag=%s\n", base$occ_alarm, base$mag_alarm))
-  cat(sprintf("  Occ.inj.:  occ=%s mag=%s  (expect occ fires, mag quiet)\n",
-              occ$occ_alarm, occ$mag_alarm))
-  cat(sprintf("  Mag.inj.:  occ=%s mag=%s  (expect mag fires, occ quiet)\n",
-              mag$occ_alarm, mag$mag_alarm))
+  cat(sprintf("  Occ.inj.:  occ=%s mag=%s\n", occ$occ_alarm, occ$mag_alarm))
+  cat(sprintf("  Mag.inj.:  occ=%s mag=%s\n", mag$occ_alarm, mag$mag_alarm))
   
   rows[[length(rows) + 1]] <- data.frame(
     id                 = id,
@@ -166,7 +164,7 @@ for (i in seq_len(nrow(panel))) {
 inj_tbl <- do.call(rbind, rows)
 
 write_table(inj_tbl, "injection",
-            caption = "Semi-synthetic validation. Occurrence injection sets each positive day to zero with probability $0.4$ from 2019-06-01; magnitude injection adds a $\\mathrm{Poisson}(0.5\\,y_t)$ count to each positive day from 2019-06-01. The forecast is frozen at its pre-injection parameters and covariate trajectory. A well-calibrated monitor flags the injected head and stays quiet on the other.")
+            caption = "Semi-synthetic validation. Occurrence injection sets each positive day to zero with probability $0.4$ from 2019-06-01; magnitude injection adds a $\\mathrm{Poisson}(0.5\\,y_t)$ count to each positive day from 2019-06-01. The forecast is frozen at its pre-injection parameters and covariate trajectory. A well-calibrated monitor flags the injected head.")
 
 cat("\n=== Injection summary ===\n\n")
 print(inj_tbl, row.names = FALSE)
