@@ -3,7 +3,7 @@
 #  (2) Whole-forecast PIT test with three margins: strict (0), the paper's delta (0.03), and a
 #      pi^2-scaled margin delta*pi_t^2 (the whole-forecast location signal is diluted by pi^2, so the
 #      same delta handicaps it). pi_t is predictable, so validity is unchanged.
-# Usage: source("application/07_extra_checks.R")
+# Usage: source("application/06_extra_checks.R")
 # Writes: out/application/tables/vuong.{csv,tex}, whole_margin.{csv,tex}
 
 source("R/io.R"); set_out_root("out/application")
