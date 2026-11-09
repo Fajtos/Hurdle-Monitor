@@ -1,0 +1,11 @@
+"name","value"
+"quiet",365
+"buffer",30
+"detect",180
+"min_train",1500
+"alpha",0.05
+"tol_occ",0.02
+"tol_mag",0.03
+"calib_B",300
+"pit_seed_pos",2025
+"pit_seed_whole",2024

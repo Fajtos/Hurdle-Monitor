@@ -1,0 +1,27 @@
+\begin{table}
+
+\caption{First-crossing outcome by method. For events: false alarm = first crossing in the quiet period, buffer = in the 30 days before the event, detected = within 180 days of the event, missed = none. For placebo windows any alarm is a false alarm. Comparator thresholds are calibrated by simulation under the frozen forecast.}
+\centering
+\begin{tabular}[t]{llrrrrrrr}
+\toprule
+type & method & n & false\_alarm & buffer\_alarm & detected & missed & any\_alarm & median\_delay\\
+\midrule
+event & occ & 9 & 0.222 & 0.000 & 0.222 & 0.556 & 0.444 & 32.5\\
+event & mag & 9 & 0.000 & 0.000 & 0.000 & 1.000 & 0.000 & NA\\
+event & whole & 9 & 0.222 & 0.111 & 0.222 & 0.444 & 0.556 & 55.0\\
+event & any\_head & 9 & 0.222 & 0.000 & 0.222 & 0.556 & 0.444 & 32.5\\
+event & cusum & 9 & 0.556 & 0.000 & 0.111 & 0.333 & 0.667 & 4.0\\
+\addlinespace
+event & ewma & 9 & 0.444 & 0.000 & 0.111 & 0.444 & 0.556 & 3.0\\
+event & maxsprt & 9 & 0.444 & 0.000 & 0.222 & 0.333 & 0.667 & 34.0\\
+placebo & occ & 41 & 0.098 & 0.049 & 0.024 & 0.829 & 0.171 & 138.0\\
+placebo & mag & 41 & 0.171 & 0.000 & 0.000 & 0.829 & 0.171 & NA\\
+placebo & whole & 41 & 0.244 & 0.000 & 0.049 & 0.707 & 0.293 & 19.0\\
+\addlinespace
+placebo & any\_head & 41 & 0.195 & 0.000 & 0.024 & 0.780 & 0.220 & 138.0\\
+placebo & cusum & 41 & 0.537 & 0.000 & 0.073 & 0.390 & 0.610 & 78.0\\
+placebo & ewma & 41 & 0.488 & 0.000 & 0.049 & 0.463 & 0.537 & 82.0\\
+placebo & maxsprt & 41 & 0.341 & 0.000 & 0.049 & 0.610 & 0.390 & 80.0\\
+\bottomrule
+\end{tabular}
+\end{table}

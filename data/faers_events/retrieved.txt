@@ -1,0 +1,23 @@
+Retrieved: 2026-11-09 00:03 -03
+R: R version 4.6.1 (2026-06-24 ucrt)
+Source: openFDA drug-event endpoint, count=receivedate, 2012-01-01 to 2024-12-31
+Multiple drugs in one event are summed per day (a report listing two of them counts twice).
+E01_lamotrigine_hlh: 292 reports over 4749 days, 95.7% zero days
+E02_fluoroquinolone_hypoglycaemia: 511 reports over 4749 days, 91.1% zero days
+E03_sglt2_fournier: 1569 reports over 4749 days, 80.8% zero days
+E04_fingolimod_ms_relapse: 7487 reports over 4749 days, 40.9% zero days
+E05_fluoroquinolone_aortic: 96 reports over 4749 days, 98.5% zero days
+E06_febuxostat_death: 482 reports over 4749 days, 90.6% zero days
+E07_tofacitinib_pe: 150 reports over 4749 days, 97.1% zero days
+E08_opioid_withdrawal: 41529 reports over 4749 days, 66.4% zero days
+E09_zolpidem_somnambulism: 822 reports over 4749 days, 88.7% zero days
+E10_gabapentinoid_resp_depression: 1133 reports over 4749 days, 83.0% zero days
+E11_montelukast_neuropsych: 1920 reports over 4749 days, 73.8% zero days
+E12_benzodiazepine_withdrawal: 3940 reports over 4749 days, 59.4% zero days
+E14_jak_inhibitor_cardiac: 562 reports over 4749 days, 90.0% zero days
+E15_buprenorphine_dental: 322 reports over 4749 days, 95.8% zero days
+E16_duvelisib_death: 83 reports over 4749 days, 98.4% zero days
+E17_denosumab_hypocalcemia: 2825 reports over 4749 days, 65.8% zero days
+E18_adhd_stimulant_misuse: 2425 reports over 4749 days, 73.6% zero days
+E19_opioid_safe_use: 2633 reports over 4749 days, 84.2% zero days
+E20_levetiracetam_dress: 1208 reports over 4749 days, 82.3% zero days
