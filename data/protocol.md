@@ -79,7 +79,7 @@ Reference events
 
 | Series | Event | Date | Source (URL) | Expected head |
 |---|---|---|---|---|
-| (not yet) | | | | |
+| (to be filled) | | | | |
 
 ## Part C. Added after results were seen (exploratory)
 
@@ -88,15 +88,38 @@ These were added in response to review, after the main results existed. They are
 - `application/07_extra_checks.R`: Vuong test (hurdle-NB versus NB, training window) and a whole-forecast test with three margins (strict, 0.03, and 0.03 times the occurrence probability squared).
 - `simulation/07_sensitivity.R`: null false-alarm rate against training length (four values) and monitoring length (four values), 400 replications each.
 
-## Part D. Track A comparators (to be run after this file is committed)
+## Part D. Track A comparators
 
-Frozen here so that the comparison is not tuned on results.
-1. One-part monitor (whole-forecast PIT only, no heads).
-2. Sequential score-difference gate.
-3. Rolling refit.
-4. Never refit, always refit, refit every **[not yet]** days.
+Frozen here so that the comparison is not tuned on results. The event study (Part D2) compares, on the same frozen forecast and windows:
+1. The head-wise monitor (occurrence head, magnitude head, either head).
+2. A one-part monitor (whole-forecast PIT only, no heads).
+3. CUSUM on standardized residuals (k = 0.5).
+4. EWMA on standardized residuals (lambda = 0.1).
+5. One-sided Poisson-type MaxSPRT.
 
-Outcomes: false-alarm rate in no-change series, detection rate and median delay in series with a dated event, and head-attribution accuracy.
+Outcomes: false-alarm rate in quiet periods and placebo windows, detection rate and median delay after dated events, and head-attribution accuracy.
+
+Refit strategies (never refit, rolling refit, head-specific refit) and the sequential score-difference gate are not part of this run. They belong to separate analyses that will be pre-specified in their own protocol before any such run.
+
+## Part D2. Event-window design (decided 2026-11-08, before any event-based run; final, no further edits planned)
+
+The Part B results keep the fixed split (training to 2017-12-31). The event study uses one window per event so that every event has its own quiet period and none falls in a shared control year.
+
+For an event with date T_e (all dates inclusive):
+- **Training:** the hurdle-NB is fitted on all data from 2012-01-01 to T_e minus 396 days and never refitted. Minimum training length 1500 days.
+- **Monitored period:** starts at T_e minus 395 days and ends at T_e plus 179 days. The e-detector replaces the plain e-process used in Part B for the event study only. Features use only past days (lag and 7-day roll use days up to t-1).
+- **Quiet period:** the first 365 monitored days (T_e minus 395 to T_e minus 31). Any head or whole-forecast alarm here is a false alarm.
+- **Buffer:** T_e minus 30 to T_e minus 1 (30 days). An alarm here is reported as a buffer alarm and counted as neither a detection nor a false alarm, because reporting can move slightly before a public communication.
+- **Detection window:** T_e to T_e plus 179 days (180 days). The first alarm here is a detection and the delay is the number of days from T_e. A first alarm that occurred earlier (quiet or buffer) is classified by that earlier alarm. No alarm anywhere is a miss, right-censored at 180 days.
+- **Alarm rules (e-detector):** each head (occurrence, magnitude) and the whole forecast is monitored with an e-detector in the sense of Saha and Ramdas: D_t is the sum over start days s of the betting mixture restarted at s (bets, features and tolerances as in `R/eprocess.R`: 0.02 occurrence, 0.03 magnitude and whole). A plain e-process was checked in a simulation on 2026-11-08 (occurrence shift of +1.5 on the logit after 395 quiet days) and lost power after a long quiet period (detected 2 of 20 simulated shifts, against 20 of 20 for the e-detector). An alarm is D_t at or above 2n/0.05 for a head and n/0.05 for the whole forecast, where n is the number of monitored days (575); by the e-detector average-run-length bound this keeps the chance of a false alarm over the monitored period near or below 0.05 for each head. "Any head" is the earlier crossing of the two heads.
+- **Comparators** (CUSUM k=0.5, EWMA lambda=0.1, one-sided Poisson-type MaxSPRT): same frozen forecast, same windows. Each threshold is the 95th percentile of the maximum of its statistic over the whole monitored period, from B=300 series simulated from the frozen forecast with the observed covariates. This gives all methods the same nominal 5% false-alarm rate per series.
+- **Randomization:** randomized PIT seeds fixed (2025 positive part, 2024 whole forecast); comparator simulation seed derived from the run identifier by `run_seed()`.
+- **Placebo windows:** for each event that ran, the same calendar windows are applied to each panel series in `data/panel.csv` (and every other series that passes the screen) that is not the event's own drug and reaction. Any alarm there is a false alarm. These series were not individually checked for events in the window, so the placebo false-alarm rate is a conservative (upper) estimate.
+- **Expected head:** fixed before any run and recorded in `events/events.csv`. A communication that adds a new reaction is expected to raise the occurrence head first; one that changes dose or use is expected to raise the magnitude head first. Head attribution counts a detection as correct if the first head to cross equals the expected head; same-day crossings are not counted correct.
+- **Series screen:** applied to each event's own training window: weekday zero share between 0.15 and 0.85, more than 30 positive weekdays, mean positive weekday count at least 1.3, training at least 1500 days, and the follow-up inside the data (to 2024-12-31). Events failing it are excluded and listed with the reason.
+- **Fewer than 10 events passing:** the study is reported as a small case series with every candidate listed and its outcome. There is no change of design and no switch to weekly counts.
+- **Events:** the list is `events/events.csv`, frozen with this protocol. One event per drug-reaction pair, first communication only. Overlapping events sharing drugs (for example the two fluoroquinolone rows) are reported with a note and not treated as independent in any summary rate beyond the descriptive table.
+- **What counts as verified:** date, URL and preferred term checked by the author against the FDA page and openFDA before the freeze. Only verified rows are run. Rows are never added or dropped after the freeze; a mistake is logged in the deviations log below.
 
 ## Deviations log
 
