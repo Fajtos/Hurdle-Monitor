@@ -1,0 +1,7 @@
+No-injection alarms equal Part E in 282 of 282 series-window-forecaster rows
+             quantity   estimate         lo          hi
+ F0 correct detection  0.3418440  0.2705751  0.41380039
+ F3 correct detection  0.2368794  0.1595407  0.30694689
+          F3 minus F0 -0.1049645 -0.1680598 -0.04101911
+           F3 over F0  0.6929461  0.5225133  0.87081459
+Power cost: F3 correct detection is 0.693 times that of F0 (rule: at least 0.8).
