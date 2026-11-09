@@ -1,0 +1,6 @@
+F0 either-head rate: 0.1348
+ forecaster       rate qualifies
+         F1 0.12056738     FALSE
+         F2 0.09219858     FALSE
+         F3 0.03546099      TRUE
+Carried forward: F3 (lowest rate; ties within 0.01 resolved in the order F1, F2, F3)
