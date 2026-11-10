@@ -1,0 +1,3 @@
+E-detector alarms equal Part F in 1692 of 1692 rows
+F0: net correct detection of the headwise e-detector over PITMonitor is 53.667 (competitive) under the rule of at least 0.8.
+F3: net correct detection of the headwise e-detector over PITMonitor is Inf (not competitive) under the rule of at least 0.8.

@@ -1,0 +1,13 @@
+"monitor","forecaster","scenario","windows_with_correct_time_alarm","target_head_first_or_tied"
+"ed","F0","mag_up15",28,24
+"ed","F0","mag_up2",107,104
+"ed","F0","occ_drop",26,20
+"ed","F3","mag_up15",27,26
+"ed","F3","mag_up2",90,89
+"ed","F3","occ_drop",17,14
+"pm","F0","mag_up15",5,5
+"pm","F0","mag_up2",6,6
+"pm","F0","occ_drop",0,0
+"pm","F3","mag_up15",1,1
+"pm","F3","mag_up2",4,4
+"pm","F3","occ_drop",1,0

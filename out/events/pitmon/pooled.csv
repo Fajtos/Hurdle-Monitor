@@ -1,0 +1,25 @@
+"method","forecaster","quantity","estimate","lo","hi"
+"Headwise e-detector, either head","F0","false_alarm",0.134751773049645,0.0463525216505349,0.251944020356234
+"Headwise e-detector, either head","F0","correct",0.341843971631206,0.270559066601847,0.411185173963541
+"Headwise e-detector, either head","F0","net_correct",0.228368794326241,0.149990458015267,0.299354304635762
+"Headwise e-detector, either head","F3","false_alarm",0.0354609929078014,0,0.0763505578391074
+"Headwise e-detector, either head","F3","correct",0.236879432624113,0.159695441710367,0.307784063260341
+"Headwise e-detector, either head","F3","net_correct",0.208510638297872,0.136840170278638,0.278436105476673
+"E-detector, whole forecast","F0","false_alarm",0.156028368794326,0.046875,0.304781746031746
+"E-detector, whole forecast","F0","correct",0.187234042553191,0.12546614872364,0.247623539982031
+"E-detector, whole forecast","F0","net_correct",0.0879432624113475,0.0145958954829155,0.152259305210918
+"E-detector, whole forecast","F3","false_alarm",0.0709219858156028,0,0.15625
+"E-detector, whole forecast","F3","correct",0.13758865248227,0.065625,0.204577624784854
+"E-detector, whole forecast","F3","net_correct",0.0879432624113475,0.0333267716535433,0.150760680723367
+"PITMonitor, whole forecast","F0","false_alarm",0.0709219858156028,0.0266666666666667,0.118421052631579
+"PITMonitor, whole forecast","F0","correct",0.00425531914893617,0,0.00994613259668507
+"PITMonitor, whole forecast","F0","net_correct",0.00425531914893617,0,0.00994613259668507
+"PITMonitor, whole forecast","F3","false_alarm",0.0638297872340425,0.0254170664108304,0.103466235632184
+"PITMonitor, whole forecast","F3","correct",0.00709219858156028,0,0.0151728502837189
+"PITMonitor, whole forecast","F3","net_correct",0,-0.00719456866938881,0.00575539568345324
+"PIT rank monitor, either head","F0","false_alarm",0.049645390070922,0.019733617131063,0.0827597188666813
+"PIT rank monitor, either head","F0","correct",0.0156028368794326,0.00540540540540541,0.0270695488721804
+"PIT rank monitor, either head","F0","net_correct",-0.00567375886524823,-0.0322635787151916,0.0150948881088197
+"PIT rank monitor, either head","F3","false_alarm",0.0638297872340425,0.0352005511328843,0.0952468487394958
+"PIT rank monitor, either head","F3","correct",0.0127659574468085,0.00591628959276018,0.0213114754098361
+"PIT rank monitor, either head","F3","net_correct",-0.00851063829787234,-0.0272758405977584,0.00662473887728342

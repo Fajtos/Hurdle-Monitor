@@ -1,0 +1,2 @@
+F0: false discovery proportion at the first rejection, e-BH 0.403 (above 0.05); uncorrected 0.606. Power at day 365: e-BH 0.236, Bonferroni 0.204, uncorrected 0.354.
+F3: false discovery proportion at the first rejection, e-BH 0.104 (above 0.05); uncorrected 0.214. Power at day 365: e-BH 0.142, Bonferroni 0.133, uncorrected 0.235.

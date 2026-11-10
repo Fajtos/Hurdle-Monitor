@@ -7,3 +7,8 @@
 renv/library/
 out/simulation/raw/
 out/application/raw/
+
+out/events/panel/traj/
+out/events/pitmon_smoke/
+out/events/panel_smoke/
+check_for_claude.txt
